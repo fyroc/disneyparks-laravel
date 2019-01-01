@@ -1,6 +1,6 @@
 {
     "name": "fyroc/disneyparks-laravel",
-    "description": "Unofficial Wait-Time API Package for Laravel",
+    "description": "Unofficial Disney Wait-Time API Package for Laravel",
     "keywords": ["laravel", "disney", "wait-time", "api", "disney-api"],
     "minimum-stability": "dev",
     "license": "MIT",
