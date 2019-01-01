@@ -1,0 +1,32 @@
+{
+    "name": "fyroc/disneyparks-laravel",
+    "description": "Unofficial Wait-Time API Package for Laravel",
+    "keywords": ["laravel", "disney", "wait-time", "api", "disney-api"],
+    "minimum-stability": "dev",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Cory Fail",
+            "email": "me@coryfail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.0",
+        "laravel/framework": "~5.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "fyroc\\DisneyParks\\": "src/DisneyParks"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "fyroc\\DisneyParks\\DisneyParksProvider"
+            ],
+            "aliases": {
+                "DisneyParks": "fyroc\\DisneyParks\\Facades\\DisneyParks"
+            }
+        }
+    }
+}
