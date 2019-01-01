@@ -6,8 +6,8 @@ use fyroc\DisneyParks\Services\DisneyAPI;
 use fyroc\DisneyParks\Services\Resort;
 use fyroc\DisneyParks\Services\Park;
 use fyroc\DisneyParks\Services\Attraction;
-    
-class DisneyParks 
+
+class DisneyParks
 {
 
     public $resort;
@@ -22,41 +22,34 @@ class DisneyParks
 
     public $attractions;
 
-    public function __construct(Application $app, Park $park)
+    public static function resort($resortid)
     {
-        $this->app = $app;
-
-        return $this;
+        return Resort::getResortByID($resortid);
     }
 
-    public static function resort($resortid) 
+    public static function resorts()
     {
-        return Resort::getResortByID($resortid);        
+        return Resort::getResorts();
     }
 
-    public static function resorts() 
+    public static function park($parkid, $region='us')
     {
-        return Resort::getResorts();        
+        return Park::getParkByID($parkid, $region);
     }
 
-    public static function park($parkid, $region='us') 
-    {
-        return Park::getParkByID($parkid, $region);        
-    }
-
-    public static function parks($resortid, $region='us') 
+    public static function parks($resortid, $region='us')
     {
         return Park::getParksByResortID($resortid, $region);
     }
 
-    public static function attraction($attractionid, $type, $region='us') 
+    public static function attraction($attractionid, $type, $region='us')
     {
-        return Attraction::getAttractionByID($attractionid, $type, $region);        
+        return Attraction::getAttractionByID($attractionid, $type, $region);
     }
 
-    public static function attractions($parkid, $region='us') 
+    public static function attractions($parkid, $region='us')
     {
-        return Attraction::getAttractionsByParkID($parkid, $region);        
+        return Attraction::getAttractionsByParkID($parkid, $region);
     }
 
 }
