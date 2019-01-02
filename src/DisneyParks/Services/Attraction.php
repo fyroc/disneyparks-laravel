@@ -4,6 +4,7 @@ namespace fyroc\DisneyParks\Services;
 
 use Exception;
 use fyroc\DisneyParks\Services\DisneyAPI;
+use Illuminate\Support\Facades\Log;
 
 class Attraction
 {
@@ -80,29 +81,33 @@ class Attraction
     
     public static function getAttractionsByParkID($parkid, $region='us') 
     {
-        
-        $attractions = Self::getWaitTimesByParkIDWDPRO($parkid, $region)->entries;
-        $attractionsArray = array();
-        
-        $name = '';
-        
-        if (isset($attraction->name)) {
-            $name = $attraction->name;
-        }
-        
-        foreach ($attractions as $attraction) {
-            $attractionArray = array();
-            $attractionArray = array(
-                "id" => $attraction->id,
-                "name" => (isset($attraction->name)) ?  $attraction->name : "",
-                "type" => $attraction->type,
-                "waitTime" => $attraction->waitTime
-            );
+        try {
+            $attractions = Self::getWaitTimesByParkIDWDPRO($parkid, $region)->entries;
+            $attractionsArray = array();
             
-            $attractionsArray[] = $attractionArray;
-        }
+            $name = '';
+            
+            if (isset($attraction->name)) {
+                $name = $attraction->name;
+            }
+            
+            foreach ($attractions as $attraction) {
+                $attractionArray = array();
+                $attractionArray = array(
+                    "id" => $attraction->id,
+                    "name" => (isset($attraction->name)) ?  $attraction->name : "",
+                    "type" => $attraction->type,
+                    "waitTime" => $attraction->waitTime
+                );
+                
+                $attractionsArray[] = $attractionArray;
+            }
 
-        return $attractionsArray;       
+            return $attractionsArray; 
+
+        } catch(\Exception $e) {
+            Log::error($e->getMessage());
+        } 
     }
     
 }
