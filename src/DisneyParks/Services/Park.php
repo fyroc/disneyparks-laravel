@@ -32,17 +32,21 @@ class Park
         return DisneyAPI::connect($apiURL, $region);        
     }
     
-    public static function getArrayOfParkIDs($resortid, $region='') 
+    public static function getArrayOfParkIDs($resortid, $region='')
     {
-        
+
         $parkURLs = Self::getParksByResortIDWDPRO($resortid, $region)->entries;
         $parkids = array();
         foreach ($parkURLs as $parkURL) {
-            $replace = "https://api.wdpro.disney.go.com/global-pool-override-B/facility-service/theme-parks/";
+            if (\strpos($parkURL->links->self->href, 'global-pool-override-B') !== false) {
+                $replace = "https://api.wdpro.disney.go.com/global-pool-override-B/facility-service/theme-parks/";
+            } else {
+               $replace = "https://api.wdpro.disney.go.com/global-pool-override-A/facility-service/theme-parks/";
+            }
             $parkid = str_replace($replace,"",$parkURL->links->self->href);
             $parkids[] = $parkid;
         }
-        
+
         return $parkids;
     }
     
